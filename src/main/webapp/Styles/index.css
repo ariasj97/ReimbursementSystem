@@ -13,12 +13,14 @@
       * em and % are relative measurements. em specifies that an element's size, for * instance, should be relative to the font size being used. % is also relative, * but it specifies that the size of an element is relative to the parent       * element's size.
       */
      border-radius: 0.5em;
-     width: 20em;
+     width: 30em;
      height: 3em;
  }
 
  button{
      background-color: rgb(255, 255, 255);
+     width: 10em;
+     height: 3em;
  }
 
  /*
@@ -37,6 +39,7 @@
   */
  #formDiv{
     text-align: center;
+    border-color: aliceblue;
  }
 
  #form{
@@ -46,7 +49,7 @@
     border-style: groove;
     border-width: 0.5px;
     padding: 3em;
-    background-color: black;
+    background-color: white;
  }
 
  #message{

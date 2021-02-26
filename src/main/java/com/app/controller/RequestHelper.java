@@ -26,7 +26,12 @@ public class RequestHelper {
 		case "/user/all":
 			response.setStatus(200);
 			return new UserService().findAll();
-			
+		case "/logout":
+			HttpSession session = request.getSession(false);
+			if(session != null) {
+				session.invalidate();
+			}
+			return "Your session has been invalidated.";
 		default:
 			response.setStatus(404);
 			return "Sorry the resource you have requested is not available or does not exist";
@@ -49,15 +54,15 @@ public class RequestHelper {
 			
 			if (new UserService().isValidUser(EMAIL, PASS)) {
 				//if the user credential are valid, I'll grab them a session and redirect the client to a new resource
-				
-				//response.sendRedirect("/ServletReview/Pages/home.html");
-				
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/Pages/home.html");
-				dispatcher.forward(request, response);
-				
 				//granting a session to client
 				HttpSession session = request.getSession();
 				session.setAttribute("useremail", EMAIL);
+				
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/Pages/home.html");
+				dispatcher.forward(request, response);
+				System.out.println("correct combo");
+			}else {
+				System.out.println("wrong combo");
 			}
 			break;
 		default:
