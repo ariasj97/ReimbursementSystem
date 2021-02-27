@@ -5,19 +5,33 @@
 		<meta charset="ISO-8859-1">
 		<title>Employee Home Menu</title>
 		<link rel = "stylesheet" href ="../Styles/home.css"></link>
+		
+	
 	</head>
 	
 	<body style = "background-color: rgb(255, 102, 102);">
-		<h1 style = "text-align:center">Login Successful welcome, Employee!</h1>
+		<h1 style = "text-align:center">Login Successful Welcome, Employee!</h1>
 		
+
 		<div class ="btn-group">
-			<button >Submit Reimbursement Request</button>
-			<button>View Pending/Resolved Requests</button>
-			<button>View My Information</button>
-			<button>Update My Information</button>
+			<form id = "btn1" method="post" action = "/ReimbursementSystem/api/ReimbursementRequest">
+				<button>Submit Reimbursement Request </button>
+			</form>	
+			<form id = "btn2" method="post" action = "/ReimbursementSystem/api/PendingRequests">
+				<button>View My Pending Requests </button>
+			</form>	
+			<form id = "btn3" method="post" action = "/ReimbursementSystem/api/ViewInformation">
+				<button>View My Information </button>
+			</form>	
+			<form id = "btn4" method="post" action = "/ReimbursementSystem/api/UpdateInformation">
+				<button>Update My Information </button>
+			</form>	
+			<form id = "btn5" method="get" action = "/ReimbursementSystem/">
+				<button>Logout </button>
+			</form>
+			
 		</div>
 
 	
 	</body>	
-		
 </html>

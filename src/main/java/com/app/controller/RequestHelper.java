@@ -30,6 +30,7 @@ public class RequestHelper {
 			HttpSession session = request.getSession(false);
 			if(session != null) {
 				session.invalidate();
+				System.out.println("logged out");
 			}
 			return "Your session has been invalidated.";
 		default:
@@ -63,8 +64,30 @@ public class RequestHelper {
 				System.out.println("correct combo");
 			}else {
 				System.out.println("wrong combo");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/Pages/wronglogin.html");
+				dispatcher.forward(request, response);
 			}
 			break;
+		case "/ReimbursementRequest":
+			response.sendRedirect("/ReimbursementSystem/Pages/reimbursementrequest.html");
+			break;
+		case "/PendingRequests":
+			response.sendRedirect("/ReimbursementSystem/Pages/pendingrequests.html");
+			break;
+		case "/ViewInformation":
+			response.sendRedirect("/ReimbursementSystem/Pages/viewinformation.html");
+			break;
+		case "/UpdateInformation":
+			response.sendRedirect("/ReimbursementSystem/Pages/updateinformation.html");
+			break;
+		case "/logout":
+			HttpSession session = request.getSession(false);
+			if(session != null) {
+				session.invalidate();
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/Pages/home.html");
+				dispatcher.forward(request, response);
+				System.out.println("logged out");
+			}
 		default:
 			response.setStatus(404);
 		
