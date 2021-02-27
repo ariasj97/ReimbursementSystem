@@ -23,6 +23,10 @@ public class Login {
 	@OneToOne (fetch = FetchType.EAGER)
 	@JoinColumn (name="userId")
 	private Employee userId;
+	
+	@OneToOne (fetch = FetchType.EAGER)
+	@JoinColumn (name="managerId")
+	private Manager managerId;
 
 	public Login() {
 		super();
