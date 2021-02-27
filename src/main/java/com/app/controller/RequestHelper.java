@@ -30,7 +30,7 @@ public class RequestHelper {
 			HttpSession session = request.getSession(false);
 			if(session != null) {
 				session.invalidate();
-				System.out.println("logged out");
+				
 			}
 			return "Your session has been invalidated.";
 		default:

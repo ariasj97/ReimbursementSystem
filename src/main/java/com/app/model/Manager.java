@@ -1,83 +1,68 @@
 package com.app.model;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name = "manager")
 public class Manager {
 	
 	@Id
 	@Column
-	private String username;
+	private int managerId;
 	
 	@Column
-	private String password;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	//@JoinColumn(name = "")
-	private int userId;
+	private String fname;
 	
 	@Column
-	private boolean manager;
+	private String lname;
 
 	public Manager() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Manager(String username, String password, int userId, boolean manager) {
+	public Manager(int managerId, String fname, String lname) {
 		super();
-		this.username = username;
-		this.password = password;
-		this.userId = userId;
-		this.manager = manager;
+		this.managerId = managerId;
+		this.fname = fname;
+		this.lname = lname;
 	}
 
-	public String getUsername() {
-		return username;
+	public int getManagerId() {
+		return managerId;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setManagerId(int managerId) {
+		this.managerId = managerId;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getFname() {
+		return fname;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setFname(String fname) {
+		this.fname = fname;
 	}
 
-	public int getUserId() {
-		return userId;
+	public String getLname() {
+		return lname;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-
-	public boolean isManager() {
-		return manager;
-	}
-
-	public void setManager(boolean manager) {
-		this.manager = manager;
+	public void setLname(String lname) {
+		this.lname = lname;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (manager ? 1231 : 1237);
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + userId;
-		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		result = prime * result + ((fname == null) ? 0 : fname.hashCode());
+		result = prime * result + ((lname == null) ? 0 : lname.hashCode());
+		result = prime * result + managerId;
 		return result;
 	}
 
@@ -90,31 +75,28 @@ public class Manager {
 		if (getClass() != obj.getClass())
 			return false;
 		Manager other = (Manager) obj;
-		if (manager != other.manager)
-			return false;
-		if (password == null) {
-			if (other.password != null)
+		if (fname == null) {
+			if (other.fname != null)
 				return false;
-		} else if (!password.equals(other.password))
+		} else if (!fname.equals(other.fname))
 			return false;
-		if (userId != other.userId)
-			return false;
-		if (username == null) {
-			if (other.username != null)
+		if (lname == null) {
+			if (other.lname != null)
 				return false;
-		} else if (!username.equals(other.username))
+		} else if (!lname.equals(other.lname))
+			return false;
+		if (managerId != other.managerId)
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Manager [username=" + username + ", password=" + password + ", userId=" + userId + ", manager="
-				+ manager + "]";
+		return "Manager [managerId=" + managerId + ", fname=" + fname + ", lname=" + lname + "]";
 	}
 	
-	
 
+	
 	
 	
 }
