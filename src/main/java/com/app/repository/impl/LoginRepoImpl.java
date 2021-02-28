@@ -18,8 +18,7 @@ public class LoginRepoImpl implements LoginRepository {
 		Session s = null;
 		Transaction tx = null;
 		int id = 0;
-		int managerid = 0;
-		int userid = 0;
+		int tid = 0;
 		
 		String temail = "";
 		String tpassword = "";
@@ -31,9 +30,9 @@ public class LoginRepoImpl implements LoginRepository {
 			Login login = (Login) s.createQuery("FROM Login L WHERE L.email = :email").setParameter("email", email).uniqueResult();
 			
 			if (login.getUserId()!=null) {
-				userid = login.getUserId().getUserId();
+				id = login.getUserId().getUserId();
 			}else {
-				managerid = login.getManagerId().getManagerId();
+				id = login.getManagerId().getManagerId();
 			}
 			
 			temail = login.getEmail();
@@ -42,14 +41,18 @@ public class LoginRepoImpl implements LoginRepository {
 		}catch(HibernateException e) {
 			e.printStackTrace();
 			tx.rollback();
+		}catch(NullPointerException e) {
+			tid = 0;
 		}finally {
 			s.close();
 		}
 		if(temail.equals(email) && tpassword.equals(password)) {
-			return id;
+			tid = id;
+		}else {
+			tid = 0;
 		}
-		
-		
+		System.out.println(tid);
+		return tid;
 	}
 
 }

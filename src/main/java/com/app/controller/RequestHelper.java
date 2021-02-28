@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.app.exception.BusinessException;
+import com.app.service.LoginService;
 import com.app.service.UserService;
 
 
@@ -53,20 +55,31 @@ public class RequestHelper {
 			System.out.println(EMAIL);
 			System.out.println(PASS);
 			
-			if (new UserService().isValidUser(EMAIL, PASS)) {
-				//if the user credential are valid, I'll grab them a session and redirect the client to a new resource
-				//granting a session to client
+			try {
+				String newlogin = new LoginService().login(EMAIL,PASS);
 				HttpSession session = request.getSession();
-				session.setAttribute("useremail", EMAIL);
-				
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/Pages/home.html");
+				session.setAttribute("usermail", EMAIL);
+				RequestDispatcher dispatcher = request.getRequestDispatcher(newlogin);
 				dispatcher.forward(request, response);
-				System.out.println("correct combo");
-			}else {
-				System.out.println("wrong combo");
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/Pages/wronglogin.html");
-				dispatcher.forward(request, response);
+			}catch(BusinessException e) {
+				e.printStackTrace();
 			}
+			
+			
+//			if (new UserService().isValidUser(EMAIL, PASS)) {
+//				//if the user credential are valid, I'll grab them a session and redirect the client to a new resource
+//				//granting a session to client
+//				HttpSession session = request.getSession();
+//				session.setAttribute("useremail", EMAIL);
+//				
+//				RequestDispatcher dispatcher = request.getRequestDispatcher("/Pages/home.html");
+//				dispatcher.forward(request, response);
+//				System.out.println("correct combo");
+//			}else {
+//				System.out.println("wrong combo");
+//				RequestDispatcher dispatcher = request.getRequestDispatcher("/Pages/wronglogin.html");
+//				dispatcher.forward(request, response);
+//			}
 			break;
 		case "/ReimbursementRequest":
 			response.sendRedirect("/ReimbursementSystem/Pages/reimbursementrequest.html");
