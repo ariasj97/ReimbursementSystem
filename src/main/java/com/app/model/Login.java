@@ -63,6 +63,14 @@ public class Login {
 	public void setUserId(Employee userId) {
 		this.userId = userId;
 	}
+	
+	public Manager getManagerId() {
+		return managerId;
+	}
+
+	public void setManagerId(Manager managerId) {
+		this.managerId = managerId;
+	}
 
 	@Override
 	public int hashCode() {
