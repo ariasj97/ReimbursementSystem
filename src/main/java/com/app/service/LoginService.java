@@ -33,4 +33,16 @@ public class LoginService {
 		
 		return url;
 	}
+	
+	public int getId(String email) throws BusinessException{
+		int id = 0;
+		try {
+			id = loginRepo.getId(email);
+		}catch(BusinessException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return id;
+	}
 }

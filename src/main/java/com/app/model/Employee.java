@@ -33,7 +33,7 @@ public class Employee {
 	@Column
 	private int phoneNumber;
 	 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn (name="managerId")
 	private Manager managerId;
 

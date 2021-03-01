@@ -5,5 +5,6 @@ import com.app.exception.BusinessException;
 public interface LoginRepository {
 	
 	 int login(String email, String password) throws BusinessException;
+	 int getId(String email) throws BusinessException;
 		
 }
