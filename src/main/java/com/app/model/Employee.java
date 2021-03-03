@@ -51,6 +51,14 @@ public class Employee {
 		this.phoneNumber = phoneNumber;
 		this.managerId = managerId;
 	}
+	public Employee(int userId, String fName, String lName, String streetAddress, int phoneNumber) {
+		super();
+		this.userId = userId;
+		this.fName = fName;
+		this.lName = lName;
+		this.streetAddress = streetAddress;
+		this.phoneNumber = phoneNumber;
+	}
 
 	public int getUserId() {
 		return userId;

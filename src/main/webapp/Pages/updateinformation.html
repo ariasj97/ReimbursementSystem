@@ -7,8 +7,22 @@
 	</head>
 	
 	<body style = "background-color: rgb(255, 102, 102);">
-		<h1 style = "text-align:center">update information page works</h1>
+		<h1 style = "text-align:center">Update Information Page</h1>
 	
+		<div id = "updateSubmitter">
+			<div>
+				<form id="from" method ="post" action ="/ReimbursementSystem/api/UpdateInformation" >
+					<input type="text" id = "nfname" min="1"  placeholder="First Name" name = "fname" /><br>
+					<input type="text" id = "nlname" min="1" step="any" placeholder="Last Name" name = "lname" /><br>
+					<input type="number" id = "nphonenumber" min="1" step="any" placeholder="Phone Number" name = "phonenumber" /><br>
+					<input type="text" id = "nstreetaddress" min="1" step="any" placeholder="Street Address" name = "streetaddress" /><br>
+					<button>Submit Changes</button>
+				</form>
+					
+			</div>
+			
+		</div>
+		
 
 	
 	</body>	

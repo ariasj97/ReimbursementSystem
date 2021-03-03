@@ -31,4 +31,7 @@ public class EmployeeService {
 		
 		return employee;
 	}
+	public void update(Employee employee) {
+		this.employeeRepo.update(employee);
+	}
 }

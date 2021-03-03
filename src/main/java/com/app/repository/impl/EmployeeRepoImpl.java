@@ -58,6 +58,26 @@ public class EmployeeRepoImpl implements EmployeeRepository {
 		}
 		return employee;
 	}
+
+	@Override
+	public void update(Employee employee) {
+		Session s = null;
+		Transaction tx = null;
+		
+		try {
+			s = HibernateSessionFactory.getSession();
+			tx = s.beginTransaction();
+			s.update(employee);
+			tx.commit();
+		}catch(HibernateException e) {
+			e.printStackTrace();
+			tx.rollback();
+		}finally {
+			s.close();
+		}
+
+		
+	}
 	}
 
 	

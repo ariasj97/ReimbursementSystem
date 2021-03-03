@@ -7,4 +7,5 @@ public interface EmployeeRepository {
 
 	Employee viewEmployeeInfo(int userid) throws BusinessException;
 	Employee getEmployee(int userid);
+	void update(Employee employee);
 }

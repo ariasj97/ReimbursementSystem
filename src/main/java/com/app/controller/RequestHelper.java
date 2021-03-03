@@ -85,6 +85,7 @@ public class RequestHelper {
 		final String RESOURCE =URI.replace("/ReimbursementSystem/api", "");
 		int id = 0;
 		RequestsService requestsService = new RequestsService();
+		EmployeeService employeeService = new EmployeeService();
 		
 		switch(RESOURCE) {
 		case "/login":
@@ -126,7 +127,15 @@ public class RequestHelper {
 			break;
 			
 		case "/UpdateInformation":
-			response.sendRedirect("/ReimbursementSystem/Pages/updateinformation.html");
+			final String FNAME = request.getParameter("fname");
+			final String LNAME = request.getParameter("lname");
+			final int NUM = Integer.parseInt(request.getParameter("phonenumber"));
+			final String ADDRESS = request.getParameter("streetaddress");
+			Integer idAttribute2 = (Integer) request.getSession().getAttribute("id");
+			
+			Employee emp = new Employee(idAttribute2,FNAME,LNAME,ADDRESS,NUM);
+			
+			employeeService.update(emp);
 			break;
 		case "/logout":
 			HttpSession session = request.getSession(false);
