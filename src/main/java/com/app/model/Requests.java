@@ -23,7 +23,7 @@ public class Requests {
 	@SequenceGenerator(allocationSize = 1, name = "request_id_seq", initialValue = 1, sequenceName="request_id_seq")
 	private int requestId;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn (name="userId")
 	private Employee userId;
 	

@@ -20,6 +20,7 @@ public class DispatcherServlet extends HttpServlet {
 		
 		final String JSON = om.writeValueAsString(RequestHelper.processGet(request, response));
 		writer.write(JSON);
+		System.out.println(JSON);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{

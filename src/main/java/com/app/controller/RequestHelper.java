@@ -1,6 +1,8 @@
 package com.app.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,8 +12,10 @@ import javax.servlet.http.HttpSession;
 
 import com.app.exception.BusinessException;
 import com.app.model.Employee;
+import com.app.model.Requests;
 import com.app.service.EmployeeService;
 import com.app.service.LoginService;
+import com.app.service.RequestsService;
 
 
 
@@ -27,20 +31,38 @@ public class RequestHelper {
 		System.out.println(RESOURCE);
 		
 		switch(RESOURCE) {
-//		case "/PendingRequests":
-//			response.sendRedirect("/ReimbursementSystem/Pages/pendingrequests.html");
-//			break;
+		case "/PendingRequests":
+			
+			List<Requests> requests = new ArrayList<>();
+			try {
+				
+				Integer idAttribute = (Integer) request.getSession().getAttribute("id");
+				
+				requests = new RequestsService().viewRequests(idAttribute);
+				//response.sendRedirect("/ReimbursementSystem/Pages/pendingrequests.html");
+				
+			}catch(BusinessException e) {
+				e.printStackTrace();
+			}
+			System.out.println(requests +"RH");
+			return requests;
+					
 		case "/ViewInformation":
+			
 			Employee employee  = new Employee();
 			try {
+				//response.sendRedirect("/ReimbursementSystem/Pages/viewinformation.html");
+				//System.out.println("get1");
 				Integer idAttribute = (Integer) request.getSession().getAttribute("id");
 				employee = new EmployeeService().viewEmployeeInfo(idAttribute);
-				System.out.println(employee);
+				//System.out.println(employee);
+				//System.out.println("GET2");
 				//response.sendRedirect("/ReimbursementSystem/Pages/viewinformation.html");
 			}catch(BusinessException e) {
 				e.printStackTrace();
 			}
 			return employee;
+			
 		case "/logout":
 			HttpSession session = request.getSession(false);
 			if(session != null) {
@@ -85,19 +107,21 @@ public class RequestHelper {
 		case "/ReimbursementRequest":
 			response.sendRedirect("/ReimbursementSystem/Pages/reimbursementrequest.html");
 			break;
-		case "/PendingRequests":
-			response.sendRedirect("/ReimbursementSystem/Pages/pendingrequests.html");
-			break;
-		case "/ViewInformation":
-			try {
-				Integer idAttribute = (Integer) request.getSession().getAttribute("id");
-				new EmployeeService().viewEmployeeInfo(idAttribute);
-				response.sendRedirect("/ReimbursementSystem/Pages/viewinformation.html");
-			}catch(BusinessException e) {
-				e.printStackTrace();
-			}
 			
-			break;
+//		case "/ViewInformation":
+//			try {
+//				System.out.println("post1");
+//				Integer idAttribute = (Integer) request.getSession().getAttribute("id");
+//				new EmployeeService().viewEmployeeInfo(idAttribute);
+//				response.sendRedirect("/ReimbursementSystem/Pages/viewinformation.html");
+//				System.out.println("post2");
+//				
+//			}catch(BusinessException e) {
+//				e.printStackTrace();
+//			}
+			
+		//	break;
+			
 		case "/UpdateInformation":
 			response.sendRedirect("/ReimbursementSystem/Pages/updateinformation.html");
 			break;
