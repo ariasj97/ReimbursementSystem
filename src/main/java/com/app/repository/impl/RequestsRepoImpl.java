@@ -1,6 +1,8 @@
 package com.app.repository.impl;
 
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -57,4 +59,27 @@ public class RequestsRepoImpl implements RequestsRepository{
 		return request;
 	}
 
+	@Override
+	public void insert(Requests request) {
+	
+		Session s = null;
+		Transaction tx = null;
+		
+		try {
+			s = HibernateSessionFactory.getSession();
+			tx = s.beginTransaction();
+			
+			s.save(request);
+			tx.commit();
+		}catch(HibernateException e) {
+			e.printStackTrace();
+			tx.rollback();
+		}finally {
+			s.close();
+		}
+
+		
+	}
+
+	
 }

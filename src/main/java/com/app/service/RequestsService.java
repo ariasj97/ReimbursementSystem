@@ -18,4 +18,8 @@ public class RequestsService {
 	public List<Requests> viewRequests(int userId) throws BusinessException{
 		return this.requestsRepo.viewRequests(userId);
 	}
+	
+	public void insert(Requests request) {
+		this.requestsRepo.insert(request);
+	}
 }

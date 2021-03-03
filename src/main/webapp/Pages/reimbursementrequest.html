@@ -7,9 +7,20 @@
 	</head>
 	
 	<body style = "background-color: rgb(255, 102, 102);">
-		<h1 style = "text-align:center">Reimbursement Request page works</h1>
+		<h1 style = "text-align:center">Reimbursement Request Page</h1>
 	
-
+		<div id = "requestSubmitter">
+			<div>
+				<form id="from" method ="post" action ="/ReimbursementSystem/api/ReimbursementRequest" >
+					<input type="number" id = "nAmount" min="1" step="any" placeholder="Amount" name = "amount" required/>
+					<button>Submit Request</button>
+				</form>
+					
+				<!-- <input type="date" id = "nDate" placeholder="Date" name = "date" required><br> -->
+			</div>
+			
+		</div>
+		<!-- <script src="../Scripts/reimbursementrequest.js"></script> -->
 	
 	</body>	
 		

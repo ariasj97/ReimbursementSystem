@@ -8,4 +8,5 @@ import com.app.model.Requests;
 public interface RequestsRepository {
 
 	List<Requests> viewRequests(int userId) throws BusinessException;
+	void insert(Requests request);
 }

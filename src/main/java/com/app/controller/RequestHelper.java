@@ -1,7 +1,11 @@
 package com.app.controller;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -37,7 +41,6 @@ public class RequestHelper {
 			try {
 				
 				Integer idAttribute = (Integer) request.getSession().getAttribute("id");
-				
 				requests = new RequestsService().viewRequests(idAttribute);
 				//response.sendRedirect("/ReimbursementSystem/Pages/pendingrequests.html");
 				
@@ -81,6 +84,7 @@ public class RequestHelper {
 		final String URI = request.getRequestURI();
 		final String RESOURCE =URI.replace("/ReimbursementSystem/api", "");
 		int id = 0;
+		RequestsService requestsService = new RequestsService();
 		
 		switch(RESOURCE) {
 		case "/login":
@@ -105,22 +109,21 @@ public class RequestHelper {
 			
 			break;
 		case "/ReimbursementRequest":
-			response.sendRedirect("/ReimbursementSystem/Pages/reimbursementrequest.html");
+	
+			final Double AMOUNT = Double.parseDouble(request.getParameter("amount"));
+			final Date DATE = new Date(System.currentTimeMillis());
+			final boolean status =false;
+			System.out.println(AMOUNT);
+			System.out.println(DATE);
+			Integer idAttribute = (Integer) request.getSession().getAttribute("id");
+			Employee employee = new EmployeeService().getEmployee(idAttribute);
+			
+			Requests newRequests = new Requests(2,employee,status,AMOUNT ,DATE);
+			
+			System.out.println(newRequests);
+			requestsService.insert(newRequests);
+				
 			break;
-			
-//		case "/ViewInformation":
-//			try {
-//				System.out.println("post1");
-//				Integer idAttribute = (Integer) request.getSession().getAttribute("id");
-//				new EmployeeService().viewEmployeeInfo(idAttribute);
-//				response.sendRedirect("/ReimbursementSystem/Pages/viewinformation.html");
-//				System.out.println("post2");
-//				
-//			}catch(BusinessException e) {
-//				e.printStackTrace();
-//			}
-			
-		//	break;
 			
 		case "/UpdateInformation":
 			response.sendRedirect("/ReimbursementSystem/Pages/updateinformation.html");

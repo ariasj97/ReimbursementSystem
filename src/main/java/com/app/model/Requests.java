@@ -20,7 +20,7 @@ public class Requests {
 	@Id
 	@Column
 	@GeneratedValue(generator ="request_id_seq", strategy = GenerationType.AUTO)
-	@SequenceGenerator(allocationSize = 1, name = "request_id_seq", initialValue = 1, sequenceName="request_id_seq")
+	@SequenceGenerator(allocationSize = 1, name = "request_id_seq", initialValue = 3, sequenceName="request_id_seq")
 	private int requestId;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -28,7 +28,7 @@ public class Requests {
 	private Employee userId;
 	
 	@Column 
-	private boolean status;
+	private boolean status = false;
 	
 	@Column 
 	private double amount;
@@ -53,6 +53,15 @@ public class Requests {
 		this.amount = amount;
 		this.date = date;
 	}
+	
+	public Requests(Employee userId, boolean status, double amount, Date date) {
+		super();
+		this.userId = userId;
+		this.status = status;
+		this.amount = amount;
+		this.date = date;
+	}
+
 
 
 	public void setRequestId(int requestId) {

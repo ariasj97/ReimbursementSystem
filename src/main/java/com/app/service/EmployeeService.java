@@ -23,4 +23,12 @@ public class EmployeeService {
 		}
 		return employee;
 	}
+	
+	public Employee getEmployee(int userid){
+		Employee employee = new Employee();
+		
+		employee = employeeRepo.getEmployee(userid);
+		
+		return employee;
+	}
 }
