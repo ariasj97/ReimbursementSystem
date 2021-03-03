@@ -1,16 +1,15 @@
 function viewRequests(){
-
-    let xhr = new XMLHttpRequest();
-
-    let url = "/ReimbursementSystem/api/PendingRequests"
     
-    let tbody = document.getElementById('requestsHere')
-    xhr.onreadystatechange = function(){
-        if(this.onreadystate==4 && this.status==200){
-            let requests = JSON.parse(xhr.responseText)
-            console.log(requests);
+    let xhr = new XMLHttpRequest();
+    let url = "/ReimbursementSystem/api/PendingRequests"
 
-            
+
+    xhr.onreadystatechange = function(){
+        if(this.readyState==4 && this.status==200){
+
+            let requests = JSON.parse(xhr.responseText)
+
+            let tbody = document.getElementById('requestsHere')
 
             for(let r of requests){
 
@@ -21,29 +20,28 @@ function viewRequests(){
                 let amount = document.createElement('td')
                 let date = document.createElement('td')
                 
-               
-
                 requestId.innerHTML = r.requestId
                 userId.innerHTML = r.userId.userId
                 status.innerHTML = r.status
                 amount.innerHTML = r.amount
-                date.innerHTML = r.date
+                let parseDate = new Date(r.date)
+                date.innerHTML = parseDate.getMonth() + "/" + parseDate.getDay() + "/" + parseDate.getFullYear()
                 
-               
-
                 tr.append(requestId)
+                tr.append(userId)
+                tr.append(status)
                 tr.append(amount)
                 tr.append(date)
-                tr.append(status)
-                tr.append(userId)
+               
                 tbody.append(tr)
+               
             }
          }
     }
+    
     xhr.open('GET',url)
     xhr.send()
 }
-
 
 window.onload = function(){
         viewRequests()

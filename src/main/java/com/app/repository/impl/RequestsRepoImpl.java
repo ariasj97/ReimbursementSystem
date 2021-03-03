@@ -1,9 +1,9 @@
 package com.app.repository.impl;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.management.Query;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -16,6 +16,8 @@ import com.app.util.HibernateSessionFactory;
 
 public class RequestsRepoImpl implements RequestsRepository{
 
+	SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
+	
 	@Override
 	public List<Requests> viewRequests(int userId) throws BusinessException {
 
@@ -37,6 +39,13 @@ public class RequestsRepoImpl implements RequestsRepository{
 //			System.out.println("before");
 //			request.forEach(System.out::println);
 //			System.out.println("after");
+			
+//			for(Requests myRequest : request) {
+//				Date date = myRequest.getDate();
+//				myRequest.setDate(Date.valueOf(sdf.format(date)));
+//				System.out.println(myRequest.getDate());
+//			}
+			
 			tx.commit();
 		}catch(HibernateException e) {
 			e.printStackTrace();

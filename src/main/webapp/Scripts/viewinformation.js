@@ -26,13 +26,13 @@ function viewInfo(){
             let managerlname =document.createElement('p') 
 
             userId.innerText = "User ID: " + information.userId
-            fname.innerText = "User First Name: " + information .fName
-            lname.innerText = "User Last Name: " + information .lName
-            phonenumber.innerText = "User Phone Number: " + information .phoneNumber
-            streetaddress.innerText = "User Street Address: " + information .streetAddress
+            fname.innerText = "User First Name: " + information.fName
+            lname.innerText = "User Last Name: " + information.lName
+            phonenumber.innerText = "User Phone Number: " + information.phoneNumber
+            streetaddress.innerText = "User Street Address: " + information.streetAddress
             managerId.innerText = "User's Manger's ID:" + information .managerId.managerId
-            managerfname.innerText = "User's Manger's First Name: " + information .managerId.fname
-            managerlname.innerText = "User's Manager's Last Name: " + information .managerId.lname
+            managerfname.innerText = "User's Manger's First Name: " + information.managerId.fname
+            managerlname.innerText = "User's Manager's Last Name: " + information.managerId.lname
 
             newInformation.append(userId)
             newInformation.append(fname)
