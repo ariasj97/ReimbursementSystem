@@ -22,4 +22,9 @@ public class RequestsService {
 	public void insert(Requests request) {
 		this.requestsRepo.insert(request);
 	}
+	
+	public List<Requests> viewRequests() throws BusinessException{
+		return this.requestsRepo.viewAllRequests();
+	}
+	
 }

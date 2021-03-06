@@ -1,7 +1,10 @@
 package com.app.service;
 
+import java.util.List;
+
 import com.app.exception.BusinessException;
 import com.app.model.Employee;
+import com.app.model.Manager;
 import com.app.repository.EmployeeRepository;
 import com.app.repository.impl.EmployeeRepoImpl;
 
@@ -24,6 +27,7 @@ public class EmployeeService {
 		return employee;
 	}
 	
+	
 	public Employee getEmployee(int userid){
 		Employee employee = new Employee();
 		
@@ -33,5 +37,15 @@ public class EmployeeService {
 	}
 	public void update(Employee employee) {
 		this.employeeRepo.update(employee);
+	}
+	
+	public Manager getManager(int id) {
+		 Manager manager = new Manager();
+		 manager = employeeRepo.getManager(id);
+		 return manager;
+	 }
+	
+	public List<Employee> viewEmployees(int managerid)throws BusinessException{
+		return this.employeeRepo.viewEmployees(managerid);
 	}
 }

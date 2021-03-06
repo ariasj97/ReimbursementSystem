@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import com.app.exception.BusinessException;
 import com.app.model.Employee;
+import com.app.model.Manager;
 import com.app.model.Requests;
 import com.app.service.EmployeeService;
 import com.app.service.LoginService;
@@ -35,6 +36,27 @@ public class RequestHelper {
 		System.out.println(RESOURCE);
 		
 		switch(RESOURCE) {
+		case "/ViewAllRequests":
+			List<Requests> allRequests = new ArrayList<>();
+			try {
+				
+				Integer idAttribute = (Integer) request.getSession().getAttribute("id");
+				allRequests = new RequestsService().viewRequests(idAttribute);
+				
+			}catch(BusinessException e) {
+				e.printStackTrace();
+			}
+			return allRequests;
+			
+		case "/ViewEmployees":
+			List<Employee> employees = new ArrayList<>();
+			try {
+				Integer idAttribute = (Integer) request.getSession().getAttribute("id");
+				employees = new EmployeeService().viewEmployees(idAttribute);
+			}catch(BusinessException e) {
+				e.printStackTrace();
+			}
+			return employees;
 		case "/PendingRequests":
 			
 			List<Requests> requests = new ArrayList<>();
@@ -131,11 +153,15 @@ public class RequestHelper {
 			final String LNAME = request.getParameter("lname");
 			final int NUM = Integer.parseInt(request.getParameter("phonenumber"));
 			final String ADDRESS = request.getParameter("streetaddress");
-			Integer idAttribute2 = (Integer) request.getSession().getAttribute("id");
 			
-			Employee emp = new Employee(idAttribute2,FNAME,LNAME,ADDRESS,NUM);
+			Integer idAttribute2 = (Integer) request.getSession().getAttribute("id");
+			Employee test =  new EmployeeService().getEmployee(idAttribute2);
+			
+			Manager manager = test.getManagerId();
+			Employee emp = new Employee(idAttribute2,FNAME,LNAME,ADDRESS,NUM,manager);
 			
 			employeeService.update(emp);
+			
 			break;
 		case "/logout":
 			HttpSession session = request.getSession(false);

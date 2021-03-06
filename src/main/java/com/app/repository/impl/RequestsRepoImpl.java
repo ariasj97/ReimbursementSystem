@@ -81,5 +81,29 @@ public class RequestsRepoImpl implements RequestsRepository{
 		
 	}
 
+	@Override
+	public List<Requests> viewAllRequests() throws BusinessException {
+		Session s = null;
+		Transaction tx = null;
+		boolean status = false;
+		List<Requests> request = new ArrayList<>();
+
+		try {
+			s = HibernateSessionFactory.getSession();
+			tx = s.beginTransaction();
+
+			request =s.createQuery("FROM Requests WHERE status = :status", Requests.class).setParameter("status", status).getResultList();
+
+			tx.commit();
+		}catch(HibernateException e) {
+			e.printStackTrace();
+			tx.rollback();
+		}finally {
+			s.close();
+		}
+		
+		return request;
+	}
 	
+
 }
