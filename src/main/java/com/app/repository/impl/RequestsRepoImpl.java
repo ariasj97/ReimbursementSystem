@@ -10,6 +10,7 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.engine.transaction.jta.platform.internal.SynchronizationRegistryBasedSynchronizationStrategy;
 
 import com.app.exception.BusinessException;
 import com.app.model.Requests;
@@ -32,21 +33,8 @@ public class RequestsRepoImpl implements RequestsRepository{
 			s = HibernateSessionFactory.getSession();
 			tx = s.beginTransaction();
 			
-//			String hql = "FROM requests r WHERE r.userid = :userid";
-//			Query query = s.createQuery(hql);
-//			query.setParameter("userid",userId);
-//			request = query.list();
-			
 			request =s.createQuery("FROM Requests WHERE userid = :userid", Requests.class).setParameter("userid", userId).getResultList();
-//			System.out.println("before");
-//			request.forEach(System.out::println);
-//			System.out.println("after");
-			
-//			for(Requests myRequest : request) {
-//				Date date = myRequest.getDate();
-//				myRequest.setDate(Date.valueOf(sdf.format(date)));
-//				System.out.println(myRequest.getDate());
-//			}
+
 			
 			tx.commit();
 		}catch(HibernateException e) {
@@ -103,6 +91,25 @@ public class RequestsRepoImpl implements RequestsRepository{
 		}
 		
 		return request;
+	}
+
+	@Override
+	public void acceptRequest(int requestid) {
+		Session s = null;
+		Transaction tx = null;
+		System.out.println(requestid);
+		try {
+			s = HibernateSessionFactory.getSession();
+			tx = s.beginTransaction();
+
+			s.createQuery("UPDATE Requests r SET r.status = true WHERE r.requestid = :requestid").setParameter("requestid", requestid).executeUpdate();
+			tx.commit();
+		}catch(HibernateException e) {
+			e.printStackTrace();
+			tx.rollback();
+		}finally {
+			s.close();
+		}
 	}
 	
 

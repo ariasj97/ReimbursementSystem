@@ -40,8 +40,7 @@ public class RequestHelper {
 			List<Requests> allRequests = new ArrayList<>();
 			try {
 				
-				Integer idAttribute = (Integer) request.getSession().getAttribute("id");
-				allRequests = new RequestsService().viewRequests(idAttribute);
+				allRequests = new RequestsService().viewRequests();
 				
 			}catch(BusinessException e) {
 				e.printStackTrace();
@@ -161,6 +160,11 @@ public class RequestHelper {
 			Employee emp = new Employee(idAttribute2,FNAME,LNAME,ADDRESS,NUM,manager);
 			
 			employeeService.update(emp);
+			
+			break;
+		case "/AcceptRequests":
+			final int REQUESTID =Integer.parseInt(request.getParameter("requestId"));
+			requestsService.acceptRequests(REQUESTID);
 			
 			break;
 		case "/logout":

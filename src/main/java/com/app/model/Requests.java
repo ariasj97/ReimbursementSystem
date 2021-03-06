@@ -21,7 +21,7 @@ public class Requests {
 	@Column
 	@GeneratedValue(generator ="request_id_seq", strategy = GenerationType.AUTO)
 	@SequenceGenerator(allocationSize = 1, name = "request_id_seq", initialValue = 3, sequenceName="request_id_seq")
-	private int requestId;
+	private int requestid;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn (name="userId")
@@ -42,12 +42,12 @@ public class Requests {
 	}	
 	
 	public int getRequestId() {
-		return requestId;
+		return requestid;
 	}
 	
 	public Requests(int requestId, Employee userId, boolean status, double amount, Date date) {
 		super();
-		this.requestId = requestId;
+		this.requestid = requestId;
 		this.userId = userId;
 		this.status = status;
 		this.amount = amount;
@@ -65,7 +65,7 @@ public class Requests {
 
 
 	public void setRequestId(int requestId) {
-		this.requestId = requestId;
+		this.requestid = requestId;
 	}
 
 	public Employee getUserId() {
@@ -108,7 +108,7 @@ public class Requests {
 		temp = Double.doubleToLongBits(amount);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
-		result = prime * result + requestId;
+		result = prime * result + requestid;
 		result = prime * result + (status ? 1231 : 1237);
 		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
@@ -130,7 +130,7 @@ public class Requests {
 				return false;
 		} else if (!date.equals(other.date))
 			return false;
-		if (requestId != other.requestId)
+		if (requestid != other.requestid)
 			return false;
 		if (status != other.status)
 			return false;
@@ -144,7 +144,7 @@ public class Requests {
 
 	@Override
 	public String toString() {
-		return "Requests [requestId=" + requestId + ", userId=" + userId + ", status=" + status + ", amount=" + amount
+		return "Requests [requestId=" + requestid + ", userId=" + userId + ", status=" + status + ", amount=" + amount
 				+ ", date=" + date + "]";
 	}
 	

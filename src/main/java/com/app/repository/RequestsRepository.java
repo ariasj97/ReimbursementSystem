@@ -9,5 +9,6 @@ public interface RequestsRepository {
 
 	List<Requests> viewRequests(int userId) throws BusinessException;
 	void insert(Requests request);
+	void acceptRequest(int requestid);
 	List<Requests> viewAllRequests() throws BusinessException;
 }

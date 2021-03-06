@@ -23,6 +23,10 @@ public class RequestsService {
 		this.requestsRepo.insert(request);
 	}
 	
+	public void acceptRequests(int requestid) {
+		this.requestsRepo.acceptRequest(requestid);
+	}
+	
 	public List<Requests> viewRequests() throws BusinessException{
 		return this.requestsRepo.viewAllRequests();
 	}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>Accept / Deny Request Page</title>
+		<link rel = "stylesheet" href ="../Styles/viewrequests.css">
+	</head>
+	
+	<body style = "background-color: rgb(255, 102, 102);">
+		<h1 style = "text-align:center">Accept / Deny Requests</h1>
+	
+		<div id ="div">
+			<form id="from" method ="post" action ="/ReimbursementSystem/api/AcceptRequests" >
+                <label>Please Enter The Request ID You Want to Accept</label><br>
+                <input type="number" id = "requestId" min="1"  placeholder="Request ID" name = "requestId" required><br>
+                <button>Accept Request</button>
+            </form>
+
+
+		</div>
+			
+
+	
+	</body>	
+</html>
+		
