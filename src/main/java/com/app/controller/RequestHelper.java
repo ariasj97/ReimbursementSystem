@@ -144,6 +144,7 @@ public class RequestHelper {
 			
 			System.out.println(newRequests);
 			requestsService.insert(newRequests);
+			response.sendRedirect("http://localhost:8080/ReimbursementSystem/Pages/reimbursementrequest.html");
 				
 			break;
 			
@@ -160,12 +161,12 @@ public class RequestHelper {
 			Employee emp = new Employee(idAttribute2,FNAME,LNAME,ADDRESS,NUM,manager);
 			
 			employeeService.update(emp);
-			
+			response.sendRedirect("http://localhost:8080/ReimbursementSystem/Pages/updateinformation.html");
 			break;
 		case "/AcceptRequests":
 			final int REQUESTID =Integer.parseInt(request.getParameter("requestId"));
 			requestsService.acceptRequests(REQUESTID);
-			
+			response.sendRedirect("http://localhost:8080/ReimbursementSystem/Pages/acceptrequests.html");
 			break;
 		case "/logout":
 			HttpSession session = request.getSession(false);
